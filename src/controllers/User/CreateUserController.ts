@@ -1,6 +1,7 @@
 import { Request,Response } from "express";
 import { CreateUserService } from "../../services/User/CreateUserService";
 import {z} from 'zod'
+import Mail from "../../lib/Mail";
 
 class CreateUserController{
     async handle(req:Request,res:Response){
@@ -20,6 +21,13 @@ class CreateUserController{
             email,
             name,
             password
+        })
+
+        Mail.sendMail({
+            from:'Felix mavila <queue@felixmacarenco@gmail.com>',
+            to:`${name} <${email}>`,
+            subject:'Cadastro de Usuario',
+            html:`Ola ${name}, bem vindo ao sistema de arquivogpt`
         })
 
         return res.json(createUser)

@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express,{Request,Response,NextFunction} from 'express'
 import { CelebrateError } from 'celebrate'
 import cors from 'cors'

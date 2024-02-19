@@ -7,14 +7,15 @@ class SaveResponseController{
 
     try{
 
+     const user_id = req.params.user_id as string;
+        
      const CreateResponseSheema = z.object({
         title:z.string(),
         link:z.string(),
         trecho:z.string(),
-        user_id:z.string()
      })
 
-     const {title,link,trecho,user_id} = CreateResponseSheema.parse(req.body);
+     const {title,link,trecho} = CreateResponseSheema.parse(req.body);
 
      const saveResponseService = new SaveResponseService();
 

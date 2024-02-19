@@ -1,13 +1,9 @@
 import { prismaClient } from "../../config/prisma";
 
 class ListUserResponseService{
-   async execute(user_id:string){
+   async execute(){
 
-    const listUserResponse = await prismaClient.result.findMany({
-        where:{
-            user_id:user_id
-        }
-    })
+    const listUserResponse = await prismaClient.result.findMany()
 
     return listUserResponse;
 

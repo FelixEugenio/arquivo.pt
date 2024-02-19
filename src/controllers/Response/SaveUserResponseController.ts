@@ -5,9 +5,6 @@ import { SaveUserResponseService } from "../../services/Response/SaveUserRespons
 class SaveUserResponseController {
     async hadle(req:Request,res:Response){
 
-        
-            const user_id = req.params.user_id as string;
-
             const UserResponseSheema = z.object({
                 title:z.string(),
                 link:z.string(),
@@ -21,8 +18,7 @@ class SaveUserResponseController {
             const saveResponse = await saveUserResponseService.execute({
                 link,
                 title,
-                trecho,
-                user_id
+                trecho
             })
 
             return res.json(saveResponse)

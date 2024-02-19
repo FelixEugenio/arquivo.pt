@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import { AuthUserService } from "../../services/users/AuthUserService";
+import { AuthUserService } from "../../services/User/AuthUserService";
 import {z} from 'zod'
 
 class AuthUserController{

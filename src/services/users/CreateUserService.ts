@@ -11,7 +11,7 @@ class CreateUserService {
        })
 
        if(checkIfUserAlreadyExists){
-        throw new Error("User Already Exists")
+        throw new Error("Usuario ja Existe")
        }
 
        const PasswordHash = await hash(password,8);
@@ -21,6 +21,12 @@ class CreateUserService {
             name,
             email,
             password:PasswordHash
+        },
+
+        select:{
+            id:true,
+            name:true,
+            email:true
         }
        })
 

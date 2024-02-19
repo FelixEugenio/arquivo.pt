@@ -22,7 +22,6 @@ class SaveUserResponseController {
             })
 
             return res.json(saveResponse)
-
     }
 
 }

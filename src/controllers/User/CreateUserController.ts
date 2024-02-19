@@ -1,7 +1,7 @@
 import { Request,Response } from "express";
 import { CreateUserService } from "../../services/User/CreateUserService";
 import {z} from 'zod'
-import Mail from "../../lib/Mail";
+import Queue from '../../lib/Queue'
 
 class CreateUserController{
     async handle(req:Request,res:Response){
@@ -17,20 +17,15 @@ class CreateUserController{
 
         const createUserService = new CreateUserService();
 
-        const createUser = await createUserService.execute({
+        const user = await createUserService.execute({
             email,
             name,
             password
         })
 
-        Mail.sendMail({
-            from:'Felix mavila <queue@ArquivoGPT@gmail.com>',
-            to:`${name} <${email}>`,
-            subject:'Cadastro de Usuario',
-            html:`Ola ${name}, bem vindo ao sistema de arquivogpt`
-        })
+        await Queue.add({user})
 
-        return res.json(createUser)
+        return res.json(user)
 
        }catch(e){
          return res.json({error:e})

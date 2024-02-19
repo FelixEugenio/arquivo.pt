@@ -5,7 +5,7 @@ import { SaveUserResponseService } from "../../services/Response/SaveUserRespons
 class SaveUserResponseController {
     async hadle(req:Request,res:Response){
 
-        try{
+        
             const user_id = req.params.user_id as string;
 
             const UserResponseSheema = z.object({
@@ -26,12 +26,6 @@ class SaveUserResponseController {
             })
 
             return res.json(saveResponse)
-
-            
-
-        }catch(e){
-  return res.json({error:e})
-        }
 
     }
 

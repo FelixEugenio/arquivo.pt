@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { CreateUserController } from "../controllers/Users/CreateUserController";
-import { AuthUserController } from "../controllers/Users/AuthUserController";
+import { CreateUserController } from "../controllers/User/CreateUserController";
+import { AuthUserController } from "../controllers/User/AuthUserController";
 import { SaveResponseController } from "../controllers/Response/SaveResponseController";
 import { isAuthenticated } from "../middlewares/isAuthenticated";
 const router = Router()

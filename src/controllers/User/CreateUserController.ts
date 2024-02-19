@@ -2,6 +2,7 @@ import { Request,Response } from "express";
 import { CreateUserService } from "../../services/User/CreateUserService";
 import {z} from 'zod'
 import Queue from '../../lib/Queue'
+import Mail from "../../lib/Mail";
 
 class CreateUserController{
     async handle(req:Request,res:Response){
@@ -23,7 +24,12 @@ class CreateUserController{
             password
         })
 
-        await Queue.add({user})
+        await Mail.sendMail({
+            from:'Felix mavila <queue@ArquivoGPT@gmail.com>',
+            to:`${user.name} <${user.email}>`,
+            subject:'Cadastro de Usuario',
+            html:`Ola ${name}, bem vindo ao arquivoGPT`
+        })
 
         return res.json(user)
 

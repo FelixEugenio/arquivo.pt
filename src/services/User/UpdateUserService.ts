@@ -17,7 +17,7 @@ class UpdateUserService{
         }
     })
 
-    if(!CheckIfUserAlreadyExists){
+    if(CheckIfUserAlreadyExists){
        throw new Error("Usuario Nao Existe")
     }
 

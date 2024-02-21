@@ -5,6 +5,11 @@ class ListUserDeatilsService{
         const user = await prismaClient.user.findFirst({
             where:{
                 id:user_id
+            },
+            select:{
+                id:true,
+                email:true,
+                name:true
             }
         })
 

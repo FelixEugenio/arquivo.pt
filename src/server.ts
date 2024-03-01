@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 app.use(router)
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _: Request, res: Response, __: NextFunction) => {
 	if (err instanceof CelebrateError) {
 		return res.status(400).json({
 			message: err.details.get('body')

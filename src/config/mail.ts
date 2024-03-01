@@ -9,7 +9,7 @@ interface MyTransportOptions extends TransportOptions {
 	};
 }
 
-const mailConfig: MyTransportOptions = {
+export const mailConfig: MyTransportOptions = {
 	host: process.env.MAIL_HOST,
 	port: process.env.MAIL_PORT,
 	auth: {
@@ -17,5 +17,3 @@ const mailConfig: MyTransportOptions = {
 		pass: process.env.MAIL_PASS
 	}
 }
-
-export { mailConfig }

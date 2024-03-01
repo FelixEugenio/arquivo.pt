@@ -1,20 +1,16 @@
 import { prismaClient } from "../../config/prisma";
 
-class ListUserDeatilsService{
-     async execute(user_id:string){
-        const user = await prismaClient.user.findFirst({
-            where:{
-                id:user_id
-            },
-            select:{
-                id:true,
-                email:true,
-                name:true
-            }
-        })
+export class ListUserDetailsService {
+	async execute(id: string) {
+		const user = await prismaClient.user.findFirst({
+			where: { id },
+			select: {
+				id: true,
+				email: true,
+				name: true
+			}
+		})
 
-        return user;
-     }
+		return user;
+	}
 }
-
-export {ListUserDeatilsService}

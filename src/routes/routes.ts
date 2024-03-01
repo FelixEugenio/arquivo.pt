@@ -1,22 +1,23 @@
 import { Router } from "express";
-import { CreateUserController } from "../controllers/User/CreateUserController";
-import { AuthUserController } from "../controllers/User/AuthUserController";
+
+import { RegisterRateLimit } from "../middlewares/RegisterRateLimit";
 import { isAuthenticated } from "../middlewares/isAuthenticated";
-import { Authlimiter } from "../shared/limit/AuthRateLimit";
-import { RegisterRateLimit } from "../shared/limit/RegisterRateLimit";
-import { SaveUserResponseController } from "../controllers/Response/SaveUserResponseController";
-import { ListUserResponseController } from "../controllers/Response/ListUserResponseController";
-import { RemoveUserResponseController } from "../controllers/Response/RemoveUserResponseController";
-import { UpdateUserController } from "../controllers/User/UpdateUserController";
-import { ListUserDetailsController } from "../controllers/User/ListUserDetailsController";
+import { UserController } from "../controllers/UserController";
+import { AuthLimiter } from "../middlewares/AuthRateLimit";
+import { ArchiveService } from "../services/archiveService";
+
 const router = Router()
 
-router.post('/users',RegisterRateLimit, new CreateUserController().handle)
-router.post('/session',Authlimiter,new AuthUserController().handle)
-router.post('/response',isAuthenticated,new SaveUserResponseController().hadle)
-router.get('/response',isAuthenticated,new ListUserResponseController().handle)
-router.delete('/response/:id',isAuthenticated, new RemoveUserResponseController().handle)
-router.put('/users/:id',isAuthenticated,new UpdateUserController().handle)
-router.get('/me',isAuthenticated,new ListUserDetailsController().handle)
+const userController = new UserController()
+const archiveController = new ArchiveService()
 
-export {router}
+router.post('/users', RegisterRateLimit, userController.add)
+router.post('/session', AuthLimiter, userController.auth)
+router.put('/users/:id', isAuthenticated, userController.update)
+router.get('/me', isAuthenticated, userController.getById)
+
+router.post('/response', isAuthenticated, archiveController.add)
+router.get('/response', isAuthenticated, archiveController.getAll)
+router.delete('/response/:id', isAuthenticated, archiveController.removeById)
+
+export { router }

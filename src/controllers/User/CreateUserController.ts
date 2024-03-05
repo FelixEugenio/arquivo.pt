@@ -25,7 +25,7 @@ class CreateUserController{
         })
 
         await Mail.sendMail({
-            from:'Felix mavila <queue@ArquivoGPT@gmail.com>',
+            from:'ArquivoGPT<@ArquivoGPT@gmail.com>',
             to:`${user.name} <${user.email}>`,
             subject:'Cadastro de Usuario',
             html:`Ola ${name}, bem vindo ao arquivoGPT`
